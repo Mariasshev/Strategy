@@ -45,16 +45,34 @@ public:
 	}
 };
 
+class Choice
+{
+	TransportStrategy* transport;
+public:
+	void SetStrategy(TransportStrategy* transportstrategy)
+	{
+		this->transport = transportstrategy;
+	}
+	void Show(double price, int time)
+	{
+		transport->Ride(price, time);
+	}
+};
 int main()
 {
+	Choice choice;
 	Bike bike;
-	bike.Ride(0, 6);
+	choice.SetStrategy(&bike);
+	choice.Show(0, 6);
 
 	Bus bus;
-	bus.Ride(5, 2);
+	choice.SetStrategy(&bike);
+	choice.Show(5, 2);
 
 	Car car;
-	car.Ride(10, 1);
+	choice.SetStrategy(&bike);
+	choice.Show(10, 1);
+
 	system("pause");
 	return 0;
 }
